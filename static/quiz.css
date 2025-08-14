@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #f0f4ff, #d9e4ff);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2b4eff;
+    animation: fadeDown 1s ease-in-out;
+}
+
+header p {
+    color: #444;
+    animation: fadeDown 1.2s ease-in-out;
+}
+
+.quiz-form {
+    background: #ffffffdd;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    animation: fadeUp 1s ease-in-out;
+}
+
+.question {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.question h3 {
+    color: #2b4eff;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    border: 5px solid #ccd8ff;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #2b4eff;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #2b4eff;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #1e36b8;
+}
+
+/* Decorative floating images */
+.decor {
+    position: absolute;
+    width: 80px;
+    opacity: 0.8;
+    animation: float 4s ease-in-out infinite;
+}
+
+.decor1 {
+    top: 10%;
+    left: 5%;
+}
+
+.decor2 {
+    bottom: 10%;
+    right: 5%;
+}
+
+/* Animations */
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

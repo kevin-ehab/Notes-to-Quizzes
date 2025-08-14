@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes to Quizzes - Fill in the Blank</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'quiz.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button onclick="back()" style="padding: 5px; padding-left: 10px; padding-right: 10px;"><img width="20px" src="https://cdn-icons-png.flaticon.com/128/2459/2459427.png" alt="back"></button>
+            <h1>📚 Notes to Quizzes 📝</h1>
+            <p>Type in the correct answers!</p>
+        </header>
+
+        <main>
+            
+            <div class="quiz-form">
+                <span id="countdownEl"></span><br>
+                <span id="score"></span>
+                {% for number in range_ %}
+                    <div class="question">
+                        <h3>{{number + 1}}. {{generated_questions[number]}}.</h3>
+                        <input type="text" id="{{number}}" placeholder="Your answer">
+                    </div>
+                {% endfor %}
+
+
+                <button id="submit">Submit Quiz</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Decorative study images -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3145/3145765.png" class="decor decor1" alt="Books">
+    <img src="https://cdn-icons-png.flaticon.com/128/2641/2641457.png" class="decor decor2" alt="Quiz">
+    <script>
+        let time = null;
+        function back(){
+            window.location = '/'
+        }
+        let btn = document.getElementById('submit')
+        {% for number in range_ %}
+            let expectedAnswer{{number}} = {{ generated_answers[number] | tojson }};
+        {% endfor %}
+
+        const scoreEl = document.getElementById('score')
+        let score = 0
+
+        btn.addEventListener('click', ()=>{
+            {% for number in range_ %}
+                let input{{number}} = document.getElementById('{{number}}')
+                let writtenAnswer{{number}} = input{{number}}.value.toLowerCase();
+                if (writtenAnswer{{number}} === expectedAnswer{{number}}){
+                    input{{number}}.style.borderColor = 'green'
+                    input{{number}}.value += '✅'
+                    score += 1
+                }else{
+                    input{{number}}.style.borderColor = 'red'
+                    input{{number}}.value += '❌' + ' Correct: ' + expectedAnswer{{number}}
+                }
+            {% endfor %}
+            if (time){
+                clearInterval(time);
+            }
+            btn.disabled = true
+            scoreEl.textContent = 'Result: ' + score + "/" + {{ generated_questions|length }}
+            document.querySelectorAll('input').forEach(input => {
+                input.disabled = true
+            })
+        })
+        
+        if ({{ timer|default("null") }} !== null){
+            beep = new Audio("{{url_for('static', filename='beep.mp3')}}")
+            let timeLeft = {{timer}};
+            let countdownEl = document.getElementById("countdownEl")
+
+            time = setInterval(() => {
+                countdownEl.textContent = 'Timer: ' + timeLeft + ' seconds left'
+                timeLeft--
+
+                if (timeLeft < 0) {
+                    countdownEl.textContent = "Time's up!"
+                    btn.click()
+                    beep.play()
+                }
+            }, 1000)
+        }
+        
+    </script>
+</body>
+</html>
