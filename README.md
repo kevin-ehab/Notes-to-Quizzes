@@ -3,6 +3,10 @@
 A simple and fun web app built with **Flask** that turns your notes into a timed fill-in-the-blank quiz! ⏳  
 Challenge yourself, test your memory, and have some fun while learning! 🚀
 
+<p align="center">
+  <img src="static/logo.png" alt="Description" width="300"/>
+</p>
+
 ---
 
 ## 🌟 Features
