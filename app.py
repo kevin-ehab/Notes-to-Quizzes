@@ -8,15 +8,46 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-unaskable = ['the','be' ,'is', 'are', 'was', 'were', 'am', 'of', 'at', 'in', 'on', 
-             'to', 'by', 'and', 'but', 'if', 'then', 'with', 'as', 'for', 
-             'from', 'a', 'an', 'he', 'she', 'it', 'its','you', 'they', 'we', 'this',
-             'that', 'these', 'those', 'because', 'although', 'unless', 'while',
-             'during', 'since', 'do', 'does', 'did', 'done', 'or', 'always',
-             'usually', 'sometimes', 'never', 'often', 'frequently', 'sometimes',
-             'occasionally', 'rarely', 'seldom', 'me', 'him', 'them', 'us', 'her',
-             'mine', 'my', 'your', 'yours', 'his', 'her', 'hers', 'our', 'ours', 
-             'their', 'theirs', 'mainly', 'has', 'have', 'had','around', 'total', 'main']
+unaskable = {
+    # Articles & determiners
+    'a','an','the','this','that','these','those','some','any','each','every',
+    'all','both','few','many','much','most','other','several','such','no','nor',
+
+    # Pronouns
+    'i','me','my','mine','myself',
+    'we','us','our','ours','ourselves',
+    'you','your','yours','yourself','yourselves',
+    'he','him','his','himself',
+    'she','her','hers','herself',
+    'it','its','itself',
+    'they','them','their','theirs','themselves',
+
+    # Auxiliaries & modals
+    'am','is','are','was','were','be','been','being',
+    'do','does','did','done',
+    'have','has','had','having',
+    'will','would','shall','should','can','could','may','might','must',
+
+    # Conjunctions & prepositions
+    'and','but','if','or','because','although','though','unless','while',
+    'before','after','during','since','until','once','when','whenever',
+    'where','wherever','whereas','as','than','then',
+    'of','at','in','on','to','by','for','with','from','about','into',
+    'over','under','between','among','against','around','through','within',
+    'without','upon','toward','towards','off',
+
+    # Question words
+    'who','whom','whose','which','what','why','how','where',
+
+    # Frequency & filler adverbs
+    'always','usually','sometimes','never','often','frequently','occasionally',
+    'rarely','seldom','generally','mainly','mostly','partly','slightly',
+
+    # Miscellaneous unhelpful
+    'yes','no','not','very','just','only','also','even','too',
+    'own','same','such','another','either','neither',
+    'total','main'
+}
 
 @app.route('/notes', methods=["POST"])
 def recieving():
